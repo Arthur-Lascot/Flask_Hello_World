@@ -23,9 +23,11 @@ jobs:
 
       - name: Start ngrok tunnel
         run: |
-          ./ngrok http 5000 > ngrok.log &
+          ngrok http 5000 > ngrok.log &
           sleep 5
-          cat ngrok.log | grep -o "https://[0-9a-zA-Z.-]*\.ngrok-free.app" | head -n 1
+          echo "------ Public URL ------"
+          grep -o "https://[0-9a-zA-Z.-]*\.ngrok-free.app" ngrok.log | head -n 1
+          echo "-------------------------"
 
       - name: Keep alive 120s
         run: sleep 120
